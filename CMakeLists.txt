@@ -12,7 +12,12 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(eigen)
 
 if(DEFINED SKBUILD)
-  # ... Fill me in!
+  // I referenced https://scikit-build.readthedocs.io/en/latest/cmake-modules/PythonExtensions.html
+  find_package(pybind11 REQUIRED)
+
+  target_include_directories(se_for_sci_hw6 PRIVATE "${eigen_SOURCE_DIR}")
+  target_compile_features(se_for_sci_hw6 PRIVATE cxx_std_11)
+  python_extension_module(se_for_sci_hw6)
 else()
   add_executable(main src/main.cpp src/integrator.hpp)
   target_include_directories(main PRIVATE src "${eigen_SOURCE_DIR}")
